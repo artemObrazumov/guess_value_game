@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "./GuessNumberGame.css";
 
 const GuessNumberGame = () => {
@@ -66,7 +66,7 @@ const GuessNumberGame = () => {
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
 
-    setGuessHistory((prev) => [...prev, { guess, attempt: newAttempts }]);
+    setGuessHistory((prev) => [...prev, guess]);
 
     if (guess === targetNumber) {
       setMessage(`Угадано число ${targetNumber} за ${newAttempts} попыток`);
@@ -178,15 +178,14 @@ const GuessNumberGame = () => {
                     <div
                       key={index}
                       className={`history-item ${
-                        item.guess === targetNumber
+                        item === targetNumber
                           ? "correct"
-                          : item.guess < targetNumber
+                          : item < targetNumber
                           ? "low"
                           : "high"
                       }`}
-                      title={`Попытка ${item.attempt}`}
                     >
-                      {item.guess}
+                      {item}
                     </div>
                   ))}
                 </div>
